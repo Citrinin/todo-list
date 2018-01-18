@@ -1,0 +1,18 @@
+.AddTask-fieldset {
+    width: 500px;
+}
+
+.AddTask-input {
+    width: 150px;
+    margin: 5px;
+}
+
+.AddTask-description {
+    width: 480px;
+    margin: 5px;
+}
+
+.AddTask-button {
+    float: right;
+    width: 100px;
+}

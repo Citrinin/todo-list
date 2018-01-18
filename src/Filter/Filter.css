@@ -1,0 +1,13 @@
+.Filter-fieldset {
+    width: 500px;
+}
+
+.Filter-input {
+    width: 150px;
+    margin: 5px;
+}
+
+.Filter-text {
+    width: 480px;
+    margin: 5px;
+}
