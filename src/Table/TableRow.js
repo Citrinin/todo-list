@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class TableRow extends Component {
     render() {
@@ -11,6 +12,13 @@ class TableRow extends Component {
             </tr>
         )
     }
+}
+
+TableRow.propTypes={
+    checked:PropTypes.bool,
+    title:PropTypes.string,
+    priority:PropTypes.string,
+    date:PropTypes.string
 }
 
 export default TableRow;
