@@ -1,34 +1,42 @@
-import React, { Component } from 'react';
-import DatePicker from '../DatePicker';
-import './AddTask.css';
+import React, { Component } from 'react'
+import { DatePicker } from '../DatePicker'
+import './AddTask.css'
+import { Form, Header, Segment } from 'semantic-ui-react'
 
+const priorityOptions = [
+    { key: '1', text: 'Low', value: 'Low' },
+    { key: '2', text: 'Medium', value: 'Medium' },
+    { key: '3', text: 'High', value: 'High', },
+]
 
-class Add_task extends Component {
+export class AddTask extends Component {
+    onSubmit = (event) => {
+        event.preventDefault();
+        let formData = [...event.target.querySelectorAll('[name]')]
+            .reduce((hash, item) => ({ ...hash, [item.getAttribute('name')]: item.value }), {});
+        this.props.onSubmit(formData);
+        console.log(formData);
+        event.target.reset();
+    }
     render() {
-        return (  <fieldset className='AddTask-fieldset'> 
-
-                <legend align="left">Add Task</legend>
-                <div>
-                <input className='AddTask-input' placeholder='Title'/>
-                <select className='AddTask-input'>
-                    <option disabled selected>Priority</option>
-                    <option>Hight</option>
-                    <option>Medium</option>
-                    <option>Low</option>
-                </select>
-                <DatePicker className='AddTask-input' placeholder='Date'/>
-                </div>
-                <div>
-                    <textarea className='AddTask-description' placeholder='Description'></textarea>
-                </div>
-                <div>
-                <button className='AddTask-button'>Add</button>
-                </div>
-            </fieldset>
-        );
+        return (
+            <div>
+                <Header attached='top' as='h3'>Add task</Header>
+                <Segment attached>
+                    <Form onSubmit={this.onSubmit} attached="true">
+                        <Form.Group>
+                            <Form.Input className='AddTask-input' placeholder='Title' name='title' />
+                            <Form.Select className='AddTask-input' defaultValue='Medium' name='priority' options={priorityOptions}>
+                            </Form.Select>
+                            <DatePicker className='AddTask-input' placeholder='Date' name='date' />
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.TextArea className='AddTask-description' placeholder='Description' name='description' fluid="true"></Form.TextArea>
+                        </Form.Group>
+                        <Form.Button color='purple' >Add Task</Form.Button>
+                    </Form>
+                </Segment>
+            </div>
+        )
     }
 }
-
-
-
-export default Add_task;

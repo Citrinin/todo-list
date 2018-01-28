@@ -1,11 +1,12 @@
-.Table {
-    width: 528px;
+.TaskTable {
+    width: 100%;
     border-collapse: collapse;
     border: solid 1px #000;
     margin: 2px;
 }
 
-tr:nth-child(even) {
+
+/* tr:nth-child(even) {
     background: #CCC
 }
 
@@ -17,4 +18,4 @@ td,
 th {
     border-right: solid 1px #000;
     border-left: solid 1px #000;
-}
+} */
