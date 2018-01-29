@@ -6,12 +6,15 @@ import PropTypes from 'prop-types';
 import sortBy from '../utils/sortBy';
 import { Table } from 'semantic-ui-react'
 
+const rows = ['Done', 'Title', 'Priority', 'Date']
+
 export class TaskTable extends Component {
     state = {
         tasks: [],
-        order: 'id'
+        order: 'title',
+        column: 'title'
     }
-    orderBy = (name) => (order) => this.setState({ order: `${order ? '' : '-'}${name}` });
+    orderBy = (name) => (order) => this.setState({ order: `${order ? '' : '-'}${name}`, column: name });
     render() {
         const {
             tasks = [],
@@ -23,16 +26,11 @@ export class TaskTable extends Component {
 
         return (
             <div>
-                <label>Table sorted by {this.state.order}</label>
-                <Table className='TaskTable' key='purple' color='purple'  >
+                <Table className='TaskTable' key='purple' color='purple' sortable >
                     <Table.Header>
                         <Table.Row>
-                            <TableHeader title='Id' setSort={this.orderBy('id')} />
-                            <TableHeader title='Done' setSort={this.orderBy('checked')} />
-                            <TableHeader title='Title' setSort={this.orderBy('title')} />
-                            <TableHeader title='Priority' setSort={this.orderBy('priority')} />
-                            <TableHeader title='Date' setSort={this.orderBy('date')} />
-                            <TableHeader title='Button' />
+                            {rows.map(item => (<TableHeader key={item} title={item} setSort={this.orderBy(item.toLowerCase())} column={this.state.column} field={item.toLowerCase()} />))}
+                            <TableHeader title='Remove' />
                         </Table.Row>
                     </Table.Header>
                     <Table.Body>

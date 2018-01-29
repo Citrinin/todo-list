@@ -15,20 +15,31 @@ export class DatePicker extends Component {
 
     }
     changeState() {
+
         this.setState({ dateType: true });
+        this.props.onChange({ target: { value: this.defaultTaskDate() } })
     }
     render() {
+        if (this.props.defaultValue) {
+            return (<Form.Input
+                type="date"
+                defaultValue={this.props.defaultValue}
+                onSelect={this.props.onChange}
+                name={this.props.name}
+                readOnly={this.props.readOnly}
+            />)
+        }
         if (!this.state['dateType']) {
             return (
                 <Form.Input
                     placeholder={this.props.placeholder}
                     onClick={() => this.changeState()} />)
         }
-        else if (this.state['dateType']) {
+        if (this.state['dateType']) {
             return (<Form.Input
                 type="date"
                 defaultValue={this.defaultTaskDate()}
-                onChange={this.props.onChange}
+                onSelect={this.props.onChange}
                 name={this.props.name}
             />)
 

@@ -4,27 +4,22 @@ import './TableHeader.css';
 import { Table } from 'semantic-ui-react'
 
 export class TableHeader extends Component {
-    drawSortButtons() {
-        return (
-            <div className='tableHeader-sort'>
-                <div onClick={() => this.props.setSort(true)}>
-                    <i className="fa fa-angle-up" aria-hidden="true"></i>
-                </div>
-                <div onClick={() => this.props.setSort(false)}>
-                    <i className="fa fa-angle-down" aria-hidden="true"></i>
-                </div>
-            </div>
-        )
+
+    state = {
+        direction: null
     }
     render() {
         return (
-            <Table.HeaderCell>
-                <div className='tableHeader-divOuter'>
-                    <div className="tableHeader-divInner">
-                        <label>{this.props.title}</label>
-                        {this.props.setSort && this.drawSortButtons()}
-                    </div>
-                </div>
+            <Table.HeaderCell
+                sorted={this.props.column === this.props.field ? this.state.direction : null}
+                onClick={() => {
+                    if (this.props.setSort) {
+                        var dir = this.state.direction === 'ascending' ? 'descending' : 'ascending'
+                        this.setState({ direction: dir })
+                        this.props.setSort(dir === 'ascending');
+                    }
+                }} >
+                <label>{this.props.title}</label>
             </Table.HeaderCell>
         )
     }

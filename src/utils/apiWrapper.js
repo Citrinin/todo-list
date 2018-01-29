@@ -13,18 +13,18 @@ try {
 }
 
 tasks = Array.isArray(tasks) ? tasks : [
-    { checked: false, title: 'Покормить кошика', priority: 'high', date: '2017-01-08' },
-    { checked: false, title: 'Спасти мир', priority: 'low', date: '2020-01-01' },
-    { checked: false, title: 'Вынести мусор', priority: 'high', date: '2019-03-12' },
-    { checked: true, title: 'Сделать дз', priority: 'ultra', date: '2018-01-18' }
-].map(item => ({...item, id: getId() }));
+    { done: false, title: 'Покормить кошика', priority: 'High', description: 'Кошик ждет паштет', date: '2017-01-08' },
+    { done: false, title: 'Спасти мир', priority: 'Low', description: 'Мир ждет тебя', date: '2020-01-01' },
+    { done: false, title: 'Вынести мусор', priority: 'Medium', description: 'Уже пора, мусор начинает жить своей жизнью', date: '2019-03-12' },
+    { done: true, title: 'Сделать домашку по реакту', priority: 'High', description: 'Очень срочно слать пул реквест', date: '2018-01-18' }
+].map(item => ({ ...item, id: getId() }));
 
 const saveTasks = () => localStorage.setItem(LS_KEY, JSON.stringify(tasks));
 
 export const getTasks = () => new Promise(resolve => setTimeout(resolve, 0, [...tasks]));
 
 export const addTask = data => {
-    let task = {...data, id: getId() };
+    let task = { ...data, id: getId() };
     tasks.push(task);
     saveTasks();
     return new Promise(resolve => setTimeout(resolve, 1000, task));

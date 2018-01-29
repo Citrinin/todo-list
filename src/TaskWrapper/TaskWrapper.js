@@ -52,13 +52,14 @@ export class TaskWrapper extends Component {
 
         } = this.state;
 
-        let filteredTasks = showComplited ? tasks : tasks.filter(item => !item.checked);
+        let filteredTasks = showComplited ? tasks : tasks.filter(item => !item.done);
         filteredTasks = startDate ? filteredTasks.filter(item => item.date >= startDate) : filteredTasks;
         filteredTasks = endDate ? filteredTasks.filter(item => item.date <= endDate) : filteredTasks;
         filteredTasks = textSearch ? filteredTasks.filter(item => (item.title.toLowerCase().indexOf(textSearch)) >= 0 || (item.description && (item.description.toLowerCase().indexOf(textSearch))) >= 0) : filteredTasks;
 
         return (
             <div className='TaskWrapper'>
+
                 <AddTask onSubmit={this.addTask} />
                 <Filter filter={filter} onFilterUpdate={this.onFilterUpdate} />
                 <TaskTable tasks={filteredTasks} removeTask={this.removeTask} updateTask={this.updateTask} />

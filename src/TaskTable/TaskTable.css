@@ -5,15 +5,14 @@
     margin: 2px;
 }
 
-
-/* tr:nth-child(even) {
-    background: #CCC
-}
+tr:nth-child(even) {}
 
 tr:nth-child(odd) {
-    background: #FFF
+    background: rgb(242, 221, 252)
 }
 
+
+/*
 td,
 th {
     border-right: solid 1px #000;

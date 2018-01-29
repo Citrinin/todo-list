@@ -7,7 +7,7 @@ export class Filter extends Component {
     render() {
         return (
             <div>
-                <Header attached='top' as='h3'>Filter</Header>
+                <Header attached='top' as='h2'>Filter</Header>
                 <Segment attached>
                     <Form>
                         <Form.Group>
