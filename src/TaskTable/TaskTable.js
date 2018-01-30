@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import sortBy from '../utils/sortBy';
 import { Table } from 'semantic-ui-react'
 
-const rows = ['Done', 'Title', 'Priority', 'Date']
+const columns = ['Done', 'Title', 'Priority', 'Date']
 
 export class TaskTable extends Component {
     state = {
@@ -29,7 +29,7 @@ export class TaskTable extends Component {
                 <Table className='TaskTable' key='purple' color='purple' sortable >
                     <Table.Header>
                         <Table.Row>
-                            {rows.map(item => (<TableHeader key={item} title={item} setSort={this.orderBy(item.toLowerCase())} column={this.state.column} field={item.toLowerCase()} />))}
+                            {columns.map(item => (<TableHeader key={item} title={item} setSort={this.orderBy(item.toLowerCase())} column={this.state.column} field={item.toLowerCase()} />))}
                             <TableHeader title='Remove' />
                         </Table.Row>
                     </Table.Header>

@@ -8,17 +8,19 @@ export class TableHeader extends Component {
     state = {
         direction: null
     }
+    clickHandler = () => {
+        if (this.props.setSort) {
+            var dir = this.state.direction === 'ascending' ? 'descending' : 'ascending'
+            this.setState({ direction: dir })
+            this.props.setSort(dir === 'ascending');
+        }
+    }
     render() {
+        let sorted = this.props.column === this.props.field ? this.state.direction : null;
         return (
             <Table.HeaderCell
-                sorted={this.props.column === this.props.field ? this.state.direction : null}
-                onClick={() => {
-                    if (this.props.setSort) {
-                        var dir = this.state.direction === 'ascending' ? 'descending' : 'ascending'
-                        this.setState({ direction: dir })
-                        this.props.setSort(dir === 'ascending');
-                    }
-                }} >
+                sorted={sorted}
+                onClick={this.clickHandler} >
                 <label>{this.props.title}</label>
             </Table.HeaderCell>
         )

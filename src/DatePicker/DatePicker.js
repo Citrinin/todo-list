@@ -17,7 +17,7 @@ export class DatePicker extends Component {
     changeState() {
 
         this.setState({ dateType: true });
-        this.props.onChange({ target: { value: this.defaultTaskDate() } })
+        this.props.onChange && this.props.onChange({ target: { value: this.defaultTaskDate() } })
     }
     render() {
         if (this.props.defaultValue) {

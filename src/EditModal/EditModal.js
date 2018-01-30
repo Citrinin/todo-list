@@ -1,14 +1,11 @@
 import React, { Component } from 'react'
 import { Button, Icon, Modal, Form } from 'semantic-ui-react'
 import { TaskInfo } from '../TaskInfo';
+import getDataFromForm from '../utils/getDataFromForm';
 
 export class EditModal extends Component {
     onSubmit = (event) => {
-
-        let formData = [...document.querySelector('.modal').querySelectorAll('[name]')]
-            .reduce((hash, item) => ({ ...hash, [item.getAttribute('name')]: item.value || item.querySelector('[aria-selected=true]').innerText }), {});
-        formData['done'] = false;
-        this.props.updateTask(this.props.task.id, formData);
+        this.props.updateTask(this.props.task.id, getDataFromForm(document.querySelector('.modal')));
         this.props.onClose();
     }
     render() {
