@@ -1,20 +1,15 @@
-import React, { Component } from 'react';
-import './App.css';
-import AddTask from './AddTask';
-import Filter from './Filter';
-import Table from './Table';
-
+import React, { Component } from 'react'
+import './App.css'
+import { TaskWrapper } from './TaskWrapper'
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <AddTask />
-        <Filter/>
-        <Table/>
+      <div className='App'>
+        <TaskWrapper />
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App

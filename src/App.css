@@ -30,3 +30,19 @@
         transform: rotate(360deg);
     }
 }
+
+.modal input:-moz-read-only {
+    opacity: 0.5 !important;
+}
+
+.modal input:read-only {
+    opacity: 0.5 !important;
+}
+
+.TaskWrapper>* {
+    margin: 20px;
+}
+
+.attached.header {
+    text-shadow: 1px 1px 3px rgb(154, 44, 179);
+}

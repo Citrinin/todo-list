@@ -1,5 +1,5 @@
 .Filter-fieldset {
-    width: 500px;
+    width: 100%;
 }
 
 .Filter-input {
@@ -10,4 +10,8 @@
 .Filter-text {
     width: 480px;
     margin: 5px;
+}
+
+.fieldDate {
+    margin: 0, 0, 0 20px;
 }
