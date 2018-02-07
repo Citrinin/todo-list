@@ -1,28 +1,30 @@
 import React, { Component } from 'react';
-import { TableRow } from './TableRow';
+import TableRow from './TableRow';
 import './TaskTable.css';
 import { TableHeader } from './TableHeader';
 import PropTypes from 'prop-types';
 import sortBy from '../utils/sortBy';
-import { Table } from 'semantic-ui-react'
+import { Table } from 'semantic-ui-react';
+import { connect } from 'react-redux';
+import { filterTasks } from '../utils/filterTasks';
+import { getTasks } from '../utils/apiWrapper';
+import { loadTasks as loadTasks_ac } from '../actions/tasks';
 
 const columns = ['Done', 'Title', 'Priority', 'Date']
 
 export class TaskTable extends Component {
     state = {
-        tasks: [],
         order: 'title',
         column: 'title'
     }
+    componentWillMount() {
+        getTasks().then(tasks => this.props.loadTasks_ac(tasks));
+    }
     orderBy = (name) => (order) => this.setState({ order: `${order ? '' : '-'}${name}`, column: name });
     render() {
-        const {
-            tasks = [],
-            updateTask,
-            removeTask
-        } = this.props;
 
-        let sortedTasks = sortBy(tasks, this.state.order);
+        let filteredTasks = filterTasks(this.props.tasks, this.props.filter);
+        let sortedTasks = sortBy(filteredTasks, this.state.order);
 
         return (
             <div>
@@ -34,7 +36,7 @@ export class TaskTable extends Component {
                         </Table.Row>
                     </Table.Header>
                     <Table.Body>
-                        {sortedTasks.map(task => <TableRow task={task} key={task.id} removeTask={removeTask} updateTask={updateTask} />)}
+                        {sortedTasks.map(task => <TableRow task={task} key={task.id} />)}
                     </Table.Body>
                 </Table>
             </div>
@@ -47,3 +49,11 @@ TaskTable.propTypes = {
     removeTask: PropTypes.func,
     updateTask: PropTypes.func
 }
+
+const mapStateToProps = (state) => ({
+    tasks: state.tasks,
+    filter: state.filter
+});
+
+
+export default connect(mapStateToProps, { loadTasks_ac })(TaskTable); 

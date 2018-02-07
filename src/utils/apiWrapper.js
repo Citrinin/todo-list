@@ -33,7 +33,7 @@ export const addTask = data => {
 export const removeTask = id => {
     tasks = tasks.filter(item => item.id !== id);
     saveTasks();
-    return new Promise(resolve => setTimeout(resolve, 1000, tasks))
+    return new Promise(resolve => setTimeout(resolve, 1000, [...tasks]))
 }
 
 export const updateTask = (id, changes) => {

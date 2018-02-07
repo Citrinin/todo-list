@@ -2,6 +2,11 @@
     text-align: center;
 }
 
+.AppContent {
+    display: flex;
+    justify-content: center;
+}
+
 .App-logo {
     animation: App-logo-spin infinite 20s linear;
     height: 80px;
@@ -40,7 +45,7 @@
 }
 
 .TaskWrapper>* {
-    margin: 20px;
+    margin: 20px !important;
 }
 
 .attached.header {

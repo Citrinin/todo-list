@@ -11,7 +11,6 @@
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css"></link>
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -29,6 +28,20 @@
     <noscript>
       You need to enable JavaScript to run this app.
     </noscript>
+    <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyCsfcjbaltRoKjdx7OATDtgfjISRomAnew",
+            authDomain: "todo-list-2e9f4.firebaseapp.com",
+            databaseURL: "https://todo-list-2e9f4.firebaseio.com",
+            projectId: "todo-list-2e9f4",
+            storageBucket: "todo-list-2e9f4.appspot.com",
+            messagingSenderId: "801244931688"
+        };
+        firebase.initializeApp(config);
+    </script>
+
     <div id="root"></div>
     <!--
       This HTML file is a template.
