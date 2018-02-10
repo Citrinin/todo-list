@@ -11,8 +11,7 @@ export class DatePicker extends Component {
     }
     defaultTaskDate = () => {
         let date = new Date();
-        return `${date.getFullYear()}-${(date.getMonth() + 1) < 10 ? ("" + date.getMonth() + 1) : date.getMonth() + 1}-${date.getDate()}`
-
+        return `${date.getFullYear()}-${(date.getMonth()) < 9 ? ("0" + (date.getMonth() + 1)) : date.getMonth() + 1}-${date.getDate() < 10 ? ("0" + (date.getDate())) : date.getDate()}`
     }
     changeState() {
 
@@ -24,22 +23,22 @@ export class DatePicker extends Component {
             return (<Form.Input
                 type="date"
                 defaultValue={this.props.defaultValue}
-                onSelect={this.props.onChange}
+                onChange={this.props.onChange}
                 name={this.props.name}
                 readOnly={this.props.readOnly}
             />)
         }
-        if (!this.state['dateType']) {
+        if (!this.state.dateType) {
             return (
                 <Form.Input
                     placeholder={this.props.placeholder}
                     onClick={() => this.changeState()} />)
         }
-        if (this.state['dateType']) {
+        if (this.state.dateType) {
             return (<Form.Input
                 type="date"
                 defaultValue={this.defaultTaskDate()}
-                onSelect={this.props.onChange}
+                onChange={this.props.onChange}
                 name={this.props.name}
             />)
 

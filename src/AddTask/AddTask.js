@@ -3,12 +3,20 @@ import './AddTask.css'
 import { Form, Header, Segment } from 'semantic-ui-react';
 import { TaskInfo } from '../TaskInfo';
 import getDataFromForm from '../utils/getDataFromForm';
+import { addTask } from '../utils/apiWrapper';
+import { addTask as addTask_ac } from '../actions/tasks';
+import { connect } from 'react-redux';
 
 
 export class AddTask extends Component {
+    addTask = (taskData) => {
+        addTask(taskData).then(taskData => {
+            this.props.addTask_ac(taskData)
+        })
+    }
     onSubmit = (event) => {
         event.preventDefault();
-        this.props.onSubmit(getDataFromForm(event.target));
+        this.addTask(getDataFromForm(event.target));
         event.target.reset();
     }
     render() {
@@ -16,7 +24,7 @@ export class AddTask extends Component {
             <div>
                 <Header attached='top' as='h2'>Add task</Header>
                 <Segment attached>
-                    <Form onSubmit={this.onSubmit} attached="true">
+                    <Form attached="true" onSubmit={this.onSubmit}>
                         <TaskInfo />
                         <Form.Button color='purple' >Add Task</Form.Button>
                     </Form>
@@ -25,3 +33,6 @@ export class AddTask extends Component {
         )
     }
 }
+
+
+export default connect(undefined, { addTask_ac })(AddTask); 

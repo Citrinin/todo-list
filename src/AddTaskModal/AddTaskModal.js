@@ -2,13 +2,13 @@ import React, { Component } from 'react'
 import { Button, Icon, Modal, Form } from 'semantic-ui-react'
 import { TaskInfo } from '../TaskInfo';
 import getDataFromForm from '../utils/getDataFromForm';
-import { updateTask as updateTask_ac } from '../actions/tasks';
-import { updateTask } from '../utils/apiWrapper';
+import { addTask as addTask_ac } from '../actions/tasks';
+import { addTask } from '../utils/apiWrapper';
 import { connect } from 'react-redux';
 
-export class EditModal extends Component {
+export class AddTaskModal extends Component {
     onSubmit = (event) => {
-        updateTask(this.props.task.id, getDataFromForm(document.querySelector('.modal'))).then(updatedTask => this.props.updateTask_ac(updatedTask));
+        addTask(getDataFromForm(document.querySelector('.modal'))).then(taskData => this.props.addTask_ac(taskData));
         this.props.onClose();
     }
     render() {
@@ -17,19 +17,19 @@ export class EditModal extends Component {
 
                 <Modal.Header>
                     <h2>
-                        <Icon name='edit' />
-                        Edit task
+                        <Icon name='plus square outline' />
+                        Add task
                     </h2>
                 </Modal.Header>
 
                 <Modal.Content>
                     <Form >
-                        <TaskInfo task={this.props.task} />
+                        <TaskInfo taskDate={this.props.taskDate} />
                     </Form>
                 </Modal.Content>
                 <Modal.Actions>
-                    <Button color='green' onClick={this.onSubmit} disabled={this.props.task.done} inverted>
-                        <Icon name='checkmark' /> Edit
+                    <Button color='green' onClick={this.onSubmit} inverted>
+                        <Icon name='checkmark' /> Add
                      </Button>
                     <Button color='red' onClick={this.props.onClose} inverted>
                         <Icon name='remove' /> Cancel
@@ -41,4 +41,4 @@ export class EditModal extends Component {
     }
 }
 
-export default connect(undefined, { updateTask_ac })(EditModal); 
+export default connect(undefined, { addTask_ac })(AddTaskModal); 
