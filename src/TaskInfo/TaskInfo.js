@@ -18,10 +18,10 @@ export class TaskInfo extends Component {
                     <Form.Input className='AddTask-input' placeholder='Title' name='title' defaultValue={task ? task.title : null} readOnly={task && task.done} />
                     <Dropdown selection className='AddTask-input' defaultValue={task ? task.priority : 'Medium'} name='priority' options={priorityOptions} disabled={task && task.done}>
                     </Dropdown>
-                    <DatePicker className='AddTask-input' placeholder='Date' name='date' defaultValue={task ? task.date : null} readOnly={task && task.done} />
+                    <DatePicker className='AddTask-input' placeholder='Date' name='date' defaultValue={task ? task.date : (this.props.taskDate ? this.props.taskDate : null)} readOnly={this.props.taskDate || (task && task.done)} />
                 </Form.Group>
                 <Form.Group>
-                    <Form.TextArea className='AddTask-description' placeholder='Description' name='description' fluid="true" defaultValue={task ? task.description : null} disabled={task && task.done}></Form.TextArea>
+                    <Form.TextArea className='AddTask-description' placeholder='Description' name='description' fluid="true" defaultValue={task ? task.description : ""} disabled={task && task.done}></Form.TextArea>
                 </Form.Group>
             </div>)
     }

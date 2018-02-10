@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Table, Input, Button, Checkbox } from 'semantic-ui-react';
 import EditModal from '../EditModal';
 import { updateTask as updateTask_ac, loadTasks as loadTasks_ac } from '../actions/tasks';

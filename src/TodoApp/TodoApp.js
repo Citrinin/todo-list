@@ -1,37 +1,59 @@
 import React, { Component } from 'react'
-import { TodoMenu } from '../TodoMenu'
+import TodoMenu from '../TodoMenu'
 import { TaskWrapper } from '../TaskWrapper';
 import { Calendar } from '../Calendar';
+import LoginForm from '../LoginForm';
+import { connect } from 'react-redux';
 
-const MENU = [{
-    color: 'purple',
-    title: 'To-do list',
-    component: <TaskWrapper />
-},
-{
-    color: 'blue',
-    title: 'Calendar',
-    component: <Calendar />
-},
-{
-    color: 'teal',
-    title: 'About',
-    position: 'right',
-    component: <label>Todo list for everyone</label>
-}]
+
 
 
 export class TodoApp extends Component {
+    menu = [{
+        permanent: false,
+        order: 0,
+        color: 'purple',
+        title: 'To-do list',
+        position: 'left',
+        component: <TaskWrapper />
+    },
+    {
+        permanent: false,
+        order: 1,
+        color: 'blue',
+        title: 'Calendar',
+        position: 'left',
+        component: <Calendar />
+    },
+    {
+        permanent: true,
+        order: 2,
+        color: 'teal',
+        title: 'About',
+        position: 'left',
+        component: <label>Todo list for everyone</label>
+    }]
+    loginItem =
+        {
+            order: -1,
+            color: 'red',
+            position: 'right',
+            component: <LoginForm onLogin={() => this.changeItem(0)} />
+        }
+
     state = {
-        active: MENU[0]
+        active: this.loginItem
     }
     changeItem = (index) => {
-        this.setState({ active: MENU[index] })
+        index === -1 ? this.setState({ active: this.loginItem }) : this.setState({ active: this.menu[index] })
     }
     render() {
+
+        this.loginItem.title = this.props.userLogined ? 'Logout' : 'Login';
+
         return (
             <div className='App'>
-                <TodoMenu menu={MENU} changeItem={this.changeItem} active={this.state.active} />
+                <TodoMenu allMenu={this.menu} loginItem={this.loginItem} changeItem={this.changeItem} active={this.state.active} />
                 <div className='AppContent'>
                     {this.state.active.component}
                 </div>
@@ -39,3 +61,10 @@ export class TodoApp extends Component {
         )
     }
 }
+
+
+const mapStateToProps = (state) => ({
+    userLogined: state.user.logined
+})
+
+export default connect(mapStateToProps)(TodoApp);
